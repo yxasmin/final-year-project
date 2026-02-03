@@ -1,0 +1,121 @@
+/* Full page center */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9
+}
+
+/* Card */
+.auth-card {
+    background: #ffffff;
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+/* Headings */
+.auth-card h2 {
+    margin-bottom: 12px;
+    color: #111111;
+}
+
+.auth-subtitle {
+  font-size: 0.9rem;
+  color: #666666;
+  margin-bottom: 8px;
+}
+
+/* Forgot password link */
+.forgot-link{
+  display: block;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  color:#666666;
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* Inputs */
+.auth-card input,
+.auth-card button {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.auth-card input{
+  border: 1px solid #dddddd;
+  margin-bottom: 15px;
+}
+/* Button */
+.auth-card button {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    background: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: block;
+}
+
+.auth-card button:hover {
+  opacity:0.85;
+}
+
+/* Messages */
+.auth-message {
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+.auth-message.success{
+  color: #2e7d32;
+}
+
+.auth-error{
+  color: #c62828;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+/* Switch link */
+.auth-switch {
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+.auth-switch a {
+  color: #1a73e8;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+/* Back to login link */
+.back-login{
+  margin-top: 15px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.back-login a {
+  color: #1a73e8;
+  text-decoration: underline;
+}
+
+.back-login a:hover {
+  opacity: 0.85;
+} 

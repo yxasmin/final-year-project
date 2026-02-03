@@ -1,0 +1,37 @@
+.shop{
+    padding: 2rem 4rem;
+}
+
+.shop-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+/* Product grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+}
+
+/* Product card */
+.product-card{
+    cursor: pointer;
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    margin-bottom:0.8rem;
+}
+
+.product-card h3 {
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin: 0.2rem 0;
+}
+.product-card p {
+    font-size: 0.9rem;
+    color: #444;
+}

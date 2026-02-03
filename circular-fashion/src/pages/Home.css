@@ -1,0 +1,129 @@
+/* Page */
+.home-container {
+    padding: 2rem;
+
+}
+
+/* Hero Section */
+
+.hero{
+    position: relative;
+    margin-bottom: 4rem;
+    z-index: 1;
+}
+
+.hero-image {
+    width: 100%;
+    height:650px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.hero-button {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem 2.5rem;
+    background: black;
+    color: white;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+.hero-button:hover {
+    background: #333;
+}
+
+/* Products */
+.horizontal-products{
+    position: relative;
+    margin: 2rem 0;
+}
+
+.horizontal-products h2{
+    margin-bottom:1rem;
+    
+}
+
+/* Product row with centered products and scroll snapping */
+.product-row {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 1rem;
+    padding: 1rem 0;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.product-row::-webkit-scrollbar{
+    display:none;
+}
+
+/*Scroll buttons */
+.scroll-btn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color:#fff;
+  border: none;
+  font-size: 2rem;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.scroll-btn.left {
+    left: 0;
+}
+
+.scroll-btn.right {
+    right: 0;
+}
+
+.scroll-btn:hover{
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Product card */
+.product-card {
+    flex: 0 0 auto;
+    width:260px;
+    border-radius: 8px;
+    background: white;
+    text-align: center;
+    transition: transform 0.3 ease, box-shadow 0.3 ease;
+}
+
+.product-card img{
+    width: 100%;
+    border-radius: 8px;
+}
+
+.product-card h3 {
+    margin: 0.5rem 0;
+}
+
+.product-card p {
+    color: #555;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+/*Product brand*/
+.product-brand {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #777;
+    margin-top: 0.5rem;
+}
