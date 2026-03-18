@@ -9,44 +9,65 @@ import Profile from "./pages/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ResetPasswordRequest from "./pages/ResetPasswordRequest";
 import ResetPasswordConfirm from "./pages/ResetPasswordConfirm";
+import AllProducts from "./pages/AllProducts";
+import Favourites from "./pages/Favourites";
+import { FavouritesProvider } from "./pages/FavouritesContext";
+import RecyclingLocator from "./pages/RecyclingLocator";
+
+
+
 function App() {
   return (
+  <FavouritesProvider>
     <Router>
       <Routes>
-        
+
         {/* Auth pages - No Navbar or footer */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 
         {/* Password reset */}
         <Route path="/reset-password" element={<ResetPasswordRequest />} />
-        <Route path="/reset-password-confirm" element={<ResetPasswordConfirm />}/>
+        <Route path="/reset-password-confirm" element={<ResetPasswordConfirm />} />
 
         {/* Main app pages - WITH navbar & footer */}
         <Route
           path="/*"
           element={
             <>
-             <Navbar />
+              <Navbar />
 
-             <Routes>
-               <Route path="/" element={<Home />} />
-               <Route
-                 path="/profile"
-                 element={
-                  <ProtectedRoute>
-                    <Profile />
-                  </ProtectedRoute>
-                 }
-                 />
-             </Routes>
+              <Routes>
+                {/*Home page*/}
+                <Route path="/" element={<Home />} />
 
-             <Footer />
+                {/*Products page*/}
+                <Route path="/products" element={<AllProducts />} />
+                
+                {/*Recycling Locator*/}
+                <Route path="/recycling-locator" element={<RecyclingLocator />} />
+
+                {/*Favourites page*/}
+                <Route path="/favourites" element={<Favourites />} />
+
+                {/*Profile page - protected route*/}
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectedRoute>
+                      <Profile />
+                    </ProtectedRoute>
+                  }
+                />
+              </Routes>
+
+              <Footer />
             </>
           }
         />
-        </Routes>
-        </Router>
+      </Routes>
+    </Router>
+    </FavouritesProvider>
   );
 }
 export default App;

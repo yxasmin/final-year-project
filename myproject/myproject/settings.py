@@ -137,6 +137,11 @@ REST_FRAMEWORK = {
     ),
 }
 
-#Email settings for password reset
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-DEFAULT_FROM_EMAIL = "no reply@rot8te.com"
+#Email settings for password reset and login confirmation
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = '6b1595b6064c64'
+EMAIL_HOST_PASSWORD = 'a33cf4008c3716'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'noreply@rot8te.com'

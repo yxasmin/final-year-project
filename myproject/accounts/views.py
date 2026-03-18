@@ -22,6 +22,21 @@ def register(request):
         user = serializer.save()
         refresh = RefreshToken.for_user(user)
 
+        #Confirmation email after sucessful registration
+        send_mail(
+            subject="Welcome to Rot8te!",
+            message=(
+               f"Hi {user.username}, \n\n"
+               "Thank you for registering with Rot8te - your circular fashion destination. \n \n"
+               "Your account has been successfully created. You can now login and start "
+               "saving your favourite ethical and sustaianble pieces. \n \n"
+               "Welcome aboard, \n"
+               "The Rot8te Team"
+            ),
+            from_email="noreply@rot8te.com",
+            recipient_list=[user.email],
+        )
+
         return Response(
           {
               "token": str(refresh.access_token),
@@ -41,6 +56,17 @@ def profile(request):
         "email": request.user.email,
     })
 
+#Delete Account
+@api_view(["DELETE"])
+@permission_classes([IsAuthenticated])
+def delete_account(request):
+    user = request.user
+    user.delete()
+    return Response(
+        {"message": "Account deleted successfully."},
+        status=status.HTTP_200_OK,
+    )
+    
 #Password Reset Request
 class PasswordResetRequestView(APIView):
     def post(self, request):

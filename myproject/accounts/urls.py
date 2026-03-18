@@ -2,6 +2,7 @@ from django.urls import path
 from .views import (
     register, 
     profile,
+    delete_account,
     PasswordResetRequestView,
     PasswordResetConfirmView,
 )
@@ -21,6 +22,7 @@ urlpatterns = [
     
     #Protected route
     path('profile/', profile, name='profile'),
+    path('delete-account/', delete_account, name='delete_account'),
     
     #Password reset
     path(
