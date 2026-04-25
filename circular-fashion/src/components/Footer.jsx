@@ -17,7 +17,7 @@ function Footer() {
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/products">Shop</Link></li>
                         <li><Link to ="/recycling-locator">Recycling Locator</Link></li>
-                        <li>About Us</li>
+                        <li><Link to="/about">About Us</Link></li>
                     </ul>
                 </div>
                 <div className="footer-section">

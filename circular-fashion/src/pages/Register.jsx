@@ -27,8 +27,9 @@ const handleSubmit = async (e) => {
 
   const data = await registerUser(form);
   
-  if (data?.token) {
-    localStorage.setItem("accessToken", data.token);
+  if (data?.access) {
+    localStorage.setItem("accessToken", data.access);
+    localStorage.setItem("refreshToken", data.refresh);
     localStorage.setItem("username", data.username);
 
   navigate("/profile");

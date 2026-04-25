@@ -1,17 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Heart, User, Leaf, LogOut, KeyRound, Trash2 } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Heart, User, Leaf, LogOut, KeyRound, Trash2, Trophy } from 'lucide-react';
 import { useFavourites } from './FavouritesContext';
+import FavouriteCard, { BADGE_COLORS } from "./FavouriteCard";
 import "./Profile.css";
+import api from "../api";
 
-//Badge colours
-const BADGE_COLORS = {
-    Organic:"#4a7c59",
-    Upcycled: "#7c6a4a",
-    Natural: "#6a7c4a",
-    Recycled:"#4a6a7c",
-    Ethical:"#7c4a6a",
-};
+
 
 const sustainabilityLabel = s =>
   s >= 5 ? "Excellent" : s >= 4 ? "Great" : s >= 3 ? "Good" : "Fair";
@@ -24,36 +19,26 @@ export default function Profile(){
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [deleteError, setDeleteError] = useState("");
     const {favourites} = useFavourites();
+    const navigate = useNavigate();
 
     //Fetch logged-in user data from Django backend
     useEffect (() => {
-      const token = localStorage.getItem("accessToken");
-      if(!token) {
-        setError("Not logged in");
+      api.get("/profile/")
+      .then(res => res.json())
+      .then(data => {
+        setUser(data);
         setLoading(false);
-        return;
-      }
-    fetch("http://localhost:8000/api/profile/", {
-      headers: { Authorization: `Bearer ${token}`}
-    })
-    .then(res => {
-      if(!res.ok) throw new Error("Failed to fetch user");
-      return res.json();
-    })
-    .then(data => {
-      setUser(data);
-      setLoading(false);
-    })
-    .catch(err => {
-      setError(err.message);
-      setLoading(false);
-    });
-  },
-  []);
+      })
+      .catch(err => {
+        setError("Failed to fetch user");
+        setLoading(false);
+      });
+      }, []);
+   
 
   //sustainability stats from favourited products
   const totalFavourites = favourites.length;
-const avgSustainability = totalFavourites > 0 ? (favourites.reduce((sum, p) => sum + (p.sustainability || 0), 0) / totalFavourites).toFixed(1) : 0;
+const avgSustainability = totalFavourites > 0 ? (favourites.reduce((sum, p) => sum + (p.sustainability || 0), 0) / totalFavourites).toFixed(0) : 0;
 const badgeCounts = favourites.reduce((acc, p) => {
   if (p.badge) acc[p.badge] = (acc[p.badge] || 0) + 1;
   return acc;
@@ -67,31 +52,34 @@ const handleLogout = () => {
 };
 // sends delete request to backend and redirects home
 const handleDeleteAccount = async () => {
-  const token =
-  localStorage.getItem("accessToken");
+  setDeleteError("");
+
   try{
-    const res = await
-    fetch("http://localhost:8000/api/delete-account/", {
-      method:"DELETE",
-      headers: { Authorization: `Bearer ${token}`
+    const res = await api.delete("/delete-account/");
+    
+    // Only show error if request FAILED
+    if(!res || !res.ok) {
+      setDeleteError("Failed to delete account. Please try again.");
+      return;
     }
-  });
-  if (res.ok) {
+  
+    // Only runs if deletion worked
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("username");
+    
+    navigate("/");
 
-localStorage.removeItem("accessToken");
-window.location.href= "/";
-  } else {
-    setDeleteError("Failed to delete account. Please try again");
-
-}
-  } catch {
-    setDeleteError("Network error. Please try again.");
+  } catch (err) {
+    setDeleteError("Failed to delete account. Please try again.")
   }
 };
-const navItems = [
+
+const tabs = [
     {id: "overview", label: "Overview", icon: User},
     {id: "favourites", label: "Saved Items", icon: Heart },
     {id: "sustainability", label: "Eco Stats", icon: Leaf},
+    {id: "challenges", label: "Challenges", icon: Trophy},
 ];
 
 if (loading) return (
@@ -115,7 +103,7 @@ return (
         <div className="profile-delete-modal">
           <h2>Delete Account</h2>
           <p>Are you sure you want to delete your account? This action cannot be undone.</p>
-          {deleteError && <p className="proifle-delete-modal__error">{deleteError}</p>}
+          {deleteError && <p className="profile-delete-modal__error">{deleteError}</p>}
           <div className="profile-delete-modal__buttons">
             <button className="profile-btn" onClick={handleDeleteAccount}>
               Yes, Delete My Account
@@ -128,44 +116,41 @@ return (
       </div>
     )}
 
-    {/*Sidebar*/}
-    <aside className="profile-sidebar">
-    {/*Avatar*/}
-    <div className="profile-sidebar__avatar">
-      <span>{user?.username?.[0]?.toUpperCase() || "U"}</span>
-    </div>
-    <p className="profile-sidebar__name">{user?.username || "User"}</p>
-    <p className="profile-sidebar__email">{user?.email || ""}</p>
-    {/* Nav*/}
-    <nav className="profile-sidebar__nav">
-      {navItems.map(({ id, label, icon: Icon}) => (
-        <button key={id} className={`profile-sidebar__nav-item ${activeSection === id ? "active" : ""}`}
-            onClick={() => setActiveSection(id)}
-            >
-             <Icon size={16} />
-             {label}
-             </button>
-          ))}
-    </nav>
-
-    {/* Logout */}
-    <div className="profile-sidebar__actions">
-    <button className="profile-sidebar__logout" onClick={handleLogout}>
-      <LogOut size={15} />
-       Logout
-    </button>
-    <Link to="/reset-password" className="profile-sidebar__action-link">
-    <KeyRound size={15} />
-    Reset Password
-    </Link>
-    <button className="profile-sidebar__delete"
-    onClick={() => setShowDeleteConfirm(true)}
-    >
-      <Trash2 size={15} />
-      Delete Account
+   
+  <div className="profile-header">
+     <div className="profile-header__left">
+      <div>
+        <h1 className="profile-header__name">{user?.username || "User"}</h1>
+        <p className="profile-header__email">{user?.email || ""}</p>
+      </div>
+     </div>
+    <div className="profile-header__actions">
+        <Link to="/reset-password" className="profile-header__action">
+          <KeyRound size={14} />
+          Reset Password
+        </Link>
+        <button className="profile-header__action profile-header__action--danger" onClick={() => setShowDeleteConfirm(true)}>
+          <Trash2 size={14} /> Delete Account
+        </button>
+        <button className="profile-header__action profile-header__action--logout" onClick={handleLogout}>
+          <LogOut size={14} /> Logout
         </button>
       </div>
-    </aside>
+    </div>
+    
+    <div className="profile-tabs">
+      {tabs.map(({id, label, icon: Icon}) => (
+          <button
+              key={id}
+              className={`profile-tab ${activeSection === id ? "profile-tab--active" : ""}`}
+              onClick={() => id === "challenges" ? navigate ("/challenges") : setActiveSection(id)}
+              >
+                <Icon size={15} />
+                {label}
+              </button>
+        ))}
+        </div>
+      
 
    {/* Main content */}
    <main className="profile-main">
@@ -231,25 +216,11 @@ return (
                     ):(
               <div className="profile-favourites-grid">
                 {favourites.map(product => (
-                    <div key={product.id} className="profile-fav-card">
-                      <div className="profile-fav-card__image-wrapper">
-                        <img src={product.image} alt={product.name} className="profile-fav-card__image"/>
-                        {product.badge && (
-                          <span className="profile-fav-card__badge" style={{ background: BADGE_COLORS[product.badge] || "#111" }}>
-                            {product.badge}
-                          </span>
-                        )}
-                      </div>
-                      <div className="profile-fav-card__info">
-                        <span className="profile-fav-card__brand">{product.brand}</span>
-                        <p className="profile-fav-card__name">{product.name}</p>
-                        <span className="profile-fav-card__price">£{product.price}</span>
-                          </div>
-                        </div>
-                      ))}
+                    <FavouriteCard key={product.id} product={product} />
+                        ))}
                       </div>
                     )}
-                    </div>
+                  </div>
                )}
                 
                {/* Sustainability section */}

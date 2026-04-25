@@ -81,7 +81,7 @@ function Navbar() {
                     </ul>
                 </li>
                 <li><Link to="/recycling-locator">Recycling Locator</Link></li>
-                <li>About Us</li>
+                <li><Link to="/about">About Us</Link></li>
             </ul>
  
             <div className="nav-icons">
@@ -112,7 +112,7 @@ function Navbar() {
                 <Heart className="nav-icon"/>
                 </Link>
 
-                <div className="usermenu" ref={userMenuRef}>
+                <div className="user-menu" ref={userMenuRef}>
                      <User
                         className="nav-icon"
                         onClick={() => setShowUserMenu(!showUserMenu)}

@@ -1,23 +1,16 @@
-
 // Register a new user
-export const registerUser = async (userData) => {
-  const res = await fetch("http://127.0.0.1:8000/api/register/", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(userData),
-  });
+import api from "../api";
 
+export const registerUser = async (userData) => {
+  const res = await api.post("/register/", userData);
   const data = await res.json();
   return data;
 };
 
 //Login an existing user
 export const loginUser = async (userData) => {
-  const res = await fetch("http://127.0.0.1:8000/api/login/", {
-    method: "POST",
-    headers: {"Content-Type": "application/json" },
-    body: JSON.stringify(userData),
-  });
-  return res.json();
-};
+  const res = await api.post("/login/", userData);
+  const data = await res.json();
+  return data;
+  };
 

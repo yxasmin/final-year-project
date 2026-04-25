@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { MapPin, Clock, Phone, Globe, Recycle, Heart } from 'lucide-react';
+import { MapPin, Clock, Globe, Recycle, Heart } from 'lucide-react';
 import './RecyclingLocator.css';
 
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
@@ -22,7 +22,7 @@ function loadGoogleMapsScript(apiKey) {
         if (existing) { existing.addEventListener('load', resolve); return; }
         const script = document.createElement('script');
         script.id = 'google-maps-script';
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places,geometry`;
         script.async = true;
         script.onload = resolve;
         script.onerror = reject;

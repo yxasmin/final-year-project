@@ -119,3 +119,51 @@
 .back-login a:hover {
   opacity: 0.85;
 } 
+
+/* mobile */
+@media (max-width: 600px) {
+
+  .auth-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    box-sizing: border-box;
+  }
+
+  .auth-card {
+    width: 100%;
+    max-width: 270px;
+    margin-top: 2rem;
+  }
+
+  .auth-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .auth-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .auth-card input {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .auth-card button {
+    font-size: 1rem;
+    padding: 12px;
+  }
+  
+  .forgot-link {
+    text-align: center;
+    font-size: 0.8rem;
+  }
+
+  .auth-switch,
+  .back-login {
+    font-size: 0.85rem;
+
+  }
+}

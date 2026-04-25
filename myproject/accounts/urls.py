@@ -3,6 +3,8 @@ from .views import (
     register, 
     profile,
     delete_account,
+    favourites,
+    challenges,
     PasswordResetRequestView,
     PasswordResetConfirmView,
 )
@@ -17,12 +19,14 @@ urlpatterns = [
     path('register/', register, name='register'),
 
     #JWT authentication
-    path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('login/', TokenObtainPairView.as_view(), name='login'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     
     #Protected route
     path('profile/', profile, name='profile'),
     path('delete-account/', delete_account, name='delete_account'),
+    path('challenges/', challenges, name='challenges'),
+    path('favourites/', favourites, name='favourites'),
     
     #Password reset
     path(

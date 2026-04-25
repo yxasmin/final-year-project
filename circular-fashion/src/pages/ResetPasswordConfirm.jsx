@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import {useSearchParams, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import {useSearchParams, useNavigate, Link } from "react-router-dom";
+import api from "../api";
 
 export default function ResetPasswordConfirm() {
   const [password, setPassword] = useState("");
@@ -39,13 +39,7 @@ const handleSubmit = async (e) => {
   }
   
   try {
-    const res = await fetch("http://127.0.0.1:8000/api/password-reset-confirm/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ uid, token, password }),
-    
-    });
-
+    const res = await api.post("/password-reset-confirm/", {uid, token, password});
     const data = await res.json();
 
     if(res.ok) {

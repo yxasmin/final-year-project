@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import api from "../api";
 
 export default function ResetPasswordRequest() {
   const [email, setEmail] = useState("");
@@ -12,12 +13,7 @@ export default function ResetPasswordRequest() {
     setError("");
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/password-reset/", {
-        method: "POST",
-        headers: {"Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
+      const res = await api.post ("/password-reset/", { email });
       const data = await res.json();
       
       if (res.ok) {
@@ -35,14 +31,14 @@ export default function ResetPasswordRequest() {
         <div className="auth-card">
            <h2>Reset Password</h2>
            <p className="auth-subtitle">
-            Enter your email to recieve a password reset link
+            Enter your email to receive a password reset link
            </p>
 
            <form onSubmit={handleSubmit}>
             <input
               type="email"
-              name="password"
-              id="password"
+              name="email"
+              id="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}

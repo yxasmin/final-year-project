@@ -1,0 +1,133 @@
+
+.achievements-page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  font-family: Georgia, serif;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 1.5rem;
+  color: #555;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: #111;
+}
+
+.achievements-page h1 {
+  font-family: Georgia, serif;
+  font-size: 2rem;
+  color: #111;
+  margin-bottom: 0.25rem;
+}
+
+.ach-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.ach-count {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.ach-pill {
+  background: #111;
+  color: #a8d5b5;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.65rem;
+  border-radius: 20px;
+}
+
+/* Section labels */
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 0.85rem;
+}
+
+/*Badge grid */
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 2.25rem;
+}
+
+/* Badge card base */
+.badge {
+  border-radius: 12px;
+  padding: 1rem 0.75rem;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: default;
+}
+
+/* Earned */
+.badge.earned {
+  background: #f0faf3;
+  border: 1px solid #b5dfc4;
+  box-shadow: 0 1px 6px rgba(74,124,89,0.1);
+}
+
+.badge.earned:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(74,124,89,0.15);
+}
+
+.badge-icon {
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.badge-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2f6b2f;
+  margin: 0 0 0.15rem;
+}
+
+/* Locked */
+.badge.locked {
+  background: #fafafa;
+  border: 1px solid #e8e8e8;
+}
+
+.badge.locked .badge-name {
+  color: #999;
+  font-weight: 500;
+}
+
+.badge-progress {
+  font-size: 0.73rem;
+  color: #bbb;
+  margin: 0.25rem 0 0;
+}
+
+/* Empty earned state */
+.empty-earned {
+  color: #aaa;
+  font-size: 0.85rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: #fafafa;
+  border-radius: 10px;
+  border: 1px dashed #e0e0e0;
+  text-align: center;
+
+}

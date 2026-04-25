@@ -103,12 +103,10 @@
 
 /* Map */
 .locator-map-wrapper {
-    position: sticky;
-    top: 1rem;
+    position: relative;
     border: 1.5px solid #e5e5e5;
     height: 560px;
     overflow: hidden;
-    position: relative;
 }
 
 .locator-map{
