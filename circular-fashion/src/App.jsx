@@ -17,6 +17,7 @@ import RecyclingLocator from "./pages/RecyclingLocator";
 import Challenges from "./pages/Challenges";
 import Achievements from "./pages/Achievements";
 import AboutUs from "./pages/AboutUs";
+import products from "./data/products.json";
 import { useEffect, useState } from "react";
 
 const Layout = () => (
@@ -27,7 +28,7 @@ const Layout = () => (
   </>
 );
 
-import products from "./data/products.json";
+
 
 function App() {
 
