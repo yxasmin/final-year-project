@@ -232,8 +232,10 @@
 /* Favourites grid */
 .profile-favourites-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, 220px);
     gap: 1.25rem;
+    /* prevents stretching */
+    justify-content: start;
 }
 
 
@@ -296,9 +298,10 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #fff;
-    padding: 0.2rem 0.5rem;
+    padding: 0.2rem 0.65rem;
     flex-shrink: 0;
-    width: 72px;
+    min-width: 92px;
+    width: auto;
     text-align: center;
 }
 
