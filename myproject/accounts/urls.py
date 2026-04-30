@@ -1,4 +1,5 @@
 from django.urls import path
+from django.http import JsonResponse
 from .views import (
     register, 
     profile,
@@ -14,7 +15,12 @@ TokenRefreshView,
 
 )
 
+def health_check(request):
+    return JsonResponse({"status": "ok"})
+
 urlpatterns = [
+
+    path('health/', health_check, name='health_check'),
     # User registration
     path('register/', register, name='register'),
 
