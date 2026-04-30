@@ -52,7 +52,7 @@ function Navbar() {
        
        const handleLogout = () => {
            localStorage.removeItem("accessToken");
-           localStrorage.removeItem("refreshToken");
+           localStorage.removeItem("refreshToken");
            localStorage.removeItem("username");
            setShowUserMenu(false);
            navigate("/");
