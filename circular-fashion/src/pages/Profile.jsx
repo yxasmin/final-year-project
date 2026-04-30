@@ -48,7 +48,10 @@ const topBadge = Object.entries(badgeCounts).sort((a, b) => b[1] - a[1])[0];
 
 const handleLogout = () => {
   localStorage.removeItem("accessToken");
-  window.location.href = "/";
+  localStorage.removeItem("refreshToken");
+  localStorage.removeItem("username");
+  window.dispatchEvent(new Event("userLoggedOut"));
+  navigate("/");
 };
 // sends delete request to backend and redirects home
 const handleDeleteAccount = async () => {

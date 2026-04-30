@@ -8,7 +8,6 @@ const CHALLENGES = [
             { id: 2, text: "Visit website 2"},
             { id: 3, text: "Visit website 3"}
         ],
-        color: "#4a7c59",
         badge: "/images/badge-eco-explorer.png"
         
     },
@@ -23,7 +22,6 @@ const CHALLENGES = [
             { id: 4, text: "Donate item 4"},
             { id: 5, text: "Donate item 5"}
         ],
-        color: "#7c4a6a",
         badge: "/images/badge-generous-giver.png"
         
     },    
@@ -35,7 +33,6 @@ const CHALLENGES = [
           {id: 1, text:  "Repair item 1"}, 
           {id: 2, text:  "Repair item 2"}  
         ],
-        color: "#4a6a7c",
         badge: "/images/badge-repair-hero.png"
         
     },
@@ -47,7 +44,6 @@ const CHALLENGES = [
             id: i + 1,
             text: `Create outfit ${i + 1}`
         })),
-         color: "#7c6a4a",
         badge: "/images/badge-style-chameleon.png"
        
         
@@ -61,7 +57,6 @@ const CHALLENGES = [
           { id: 2, text: "Create item 2" },
           { id: 3, text: "Create item 3" }
       ],
-        color: "#6a4a7c",
         badge: "/images/badge-creator.png"    
     },
 
@@ -73,7 +68,6 @@ const CHALLENGES = [
           id: i + 1,
           text: `Swap item ${i + 1}`
         })),
-        color: "#4a7c7c",
         badge: "/images/badge-swap-star.png",
     },
 ];
